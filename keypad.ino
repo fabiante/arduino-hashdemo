@@ -1,3 +1,6 @@
+// Die restliche Implementierung ist nur aktiv, wenn der Buzzer genutzt werden soll.
+#ifdef USE_KEYPAD
+
 // Falls wir ein Keypad verwenden wird Keypad by Mark Standley, Alexander Brevig benötigt.
 // Dieser Code wurde von hier übernommen: https://funduino.de/nr-04-tastenfeld
 
@@ -22,8 +25,15 @@ Keypad keypad = Keypad(makeKeymap(keypadCharMap), rowPins, colPins, ROWS, COLS);
 void handleKeypad() {
   keypadChar = keypad.getKey();
   if (keypadChar) {
+    
+#ifdef USE_BUZZER
+    buzzerBeep();
+#endif
+
     Serial.print("Keypad: ");
     Serial.print(keypadChar);
     Serial.print("\n");
   }
 }
+
+#endif
