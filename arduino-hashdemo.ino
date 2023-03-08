@@ -6,6 +6,11 @@
 #include "SHA256.h"
 #include "LiquidCrystal_I2C.h"
 
+// Hiermit kann kontrolliert werden, welche Funktionen genutzt werden sollen.
+// Für Details die jeweilige .ino Datei öffnen
+#define USE_BUZZER
+#define USE_KEYPAD
+
 const byte ENTER = 0xA;
 const byte CLEAR = 0x21;
 const byte HASH_BUFFER_SIZE = 32;
@@ -22,6 +27,10 @@ void setup() {
   lcd.backlight();
   lcd.clear();
   lcd.print("> Ready");
+
+#ifdef USE_BUZZER
+  setupBuzzer();
+#endif
 }
 
 void loop() {
@@ -32,7 +41,9 @@ void loop() {
   // Etwas warten bevor wir erneut auf ein Signal warten
   delayMicroseconds(10);
 
+#ifdef USE_KEYPAD
   handleKeypad();
+#endif
 
   // Zentraler Loop - Tastendrücke auslesen
   while (Serial.available() > 0) {
