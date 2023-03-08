@@ -32,6 +32,8 @@ void loop() {
   // Etwas warten bevor wir erneut auf ein Signal warten
   delayMicroseconds(10);
 
+  handleKeypad();
+
   // Zentraler Loop - Tastendrücke auslesen
   while (Serial.available() > 0) {
     key = Serial.read();
