@@ -1,7 +1,7 @@
 // Die restliche Implementierung ist nur aktiv, wenn der Buzzer genutzt werden soll.
 #ifdef USE_BUZZER
 
-#define BUZZER_PIN 10
+#define BUZZER_PIN 17
 
 void setupBuzzer() {
   pinMode(BUZZER_PIN, OUTPUT);
