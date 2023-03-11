@@ -10,6 +10,7 @@
 // Für Details die jeweilige .ino Datei öffnen
 #define USE_BUZZER
 #define USE_KEYPAD
+//#define USE_USB
 
 const byte ENTER = 0xA;
 const byte CLEAR = 0x21;
@@ -31,6 +32,10 @@ void setup() {
 #ifdef USE_BUZZER
   setupBuzzer();
 #endif
+
+#ifdef USE_USB
+  setupUsb();
+#endif
 }
 
 void loop() {
@@ -43,6 +48,10 @@ void loop() {
 
 #ifdef USE_KEYPAD
   handleKeypad();
+#endif
+
+#ifdef USE_USB
+  loopUsb();
 #endif
 
   // Zentraler Loop - Tastendrücke auslesen
